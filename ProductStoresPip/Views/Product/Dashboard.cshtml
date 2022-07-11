@@ -1,0 +1,51 @@
+﻿@model IEnumerable<ProductStoresPip.Models.Product>
+
+@{
+    ViewBag.Title = "Dashboard";
+}
+
+<h2>Dashboard</h2>
+@using (Html.BeginForm("Search", "Product", FormMethod.Get))
+{
+    <input type="submit" value="search" />
+    @Html.TextBox("search")
+
+}
+
+<p>
+    
+    @Html.ActionLink("Add", "Add")
+</p>
+<table class="table">
+    
+    <tr>
+        <th>Product1</th>
+        <th>category</th>
+        <th>Price</th>
+        <th>Currency</th>
+        <th>Units</th>
+        <th>Action</th>
+        </tr>
+    @foreach (var item in Model )
+    { 
+        <tr>
+          
+            <td>@item.Product1</td>
+            <td>@item.Category</td>
+            <td>@item.Price</td>
+            <td>@item.Currency</td>
+            <td>@item.Units</td>
+         
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.id },
+              
+new {confirm=true, onclick = "return confirm('Are sure wants to delete?');"  })
+
+            </td>
+        </tr>
+    }
+   
+
+</table>
